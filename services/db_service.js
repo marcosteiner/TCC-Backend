@@ -14,10 +14,9 @@ function getData(callback){
 
 function increase(callback){
   let db = new sqlite3.Database('./database/Coffee.db');
-  let sql = `UPDATE consumption SET coffee_count = coffee_count + 1 WHERE coffee_name = "Milchkaffee" AND person_name = "Marco";`;
   db.serialize(() => {
     db.exec("BEGIN");
-    db.run(sql, [], function(err) {
+    db.run("UPDATE consumption SET coffee_count = coffee_count + 1 WHERE coffee_name = $coffeeName AND person_name = $personName", {$coffeeName: "Milchkaffee", $personName: "Marco"}, function(err) {
       if (err) {
         return console.error(err.message);
       }
@@ -30,10 +29,9 @@ function increase(callback){
 
 function decrease(callback){
   let db = new sqlite3.Database('./database/Coffee.db');
-  let sql = `UPDATE consumption SET coffee_count = coffee_count - 1 WHERE coffee_name = "Milchkaffee" AND person_name = "Marco";`
   db.serialize(() => {
     db.exec("BEGIN");
-    db.run(sql, [], function(err) {
+    db.run("UPDATE consumption SET coffee_count = coffee_count - 1 WHERE coffee_name = $coffeeName AND person_name = $personName", {$coffeeName: "Milchkaffee", $personName: "Marco"}, function(err) {
       if (err) {
         return console.error(err.message);
       }
