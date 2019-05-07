@@ -1,24 +1,24 @@
-var expect  = require("chai").expect;
-var request = require("request");
+let expect  = require("chai").expect;
+let request = require("request");
 let supertest = require("supertest");
 
 let server = supertest.agent("http://localhost:3000");
 
-describe("The Coffee Counter API", function() {
+describe("The Coffee Counter API", () => {
 
-  describe("Get coffee consumption data", function() {
+  describe("Get coffee consumption data", () => {
 
-    var url = "http://localhost:3000/";
+    let url = "http://localhost:3000/";
 
-    it("returns status 200", function(done) {
-      request(url, function(error, response, body) {
+    it("returns status 200", (done) => {
+      request(url, (error, response, body) => {
         expect(response.statusCode).to.equal(200);
         done();
       });
     });
 
-    it("returns the coffee consumption data as json", function(done) {
-      request(url, function(error, response, body) {
+    it("returns the coffee consumption data as json", (done) => {
+      request(url, (error, response, body) => {
         expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco"},{"coffee_name":"Espresso","person_name":"Marco"},{"coffee_name":"Milchkaffee","person_name":"Pascal"}]');
         done();
       });
@@ -26,21 +26,15 @@ describe("The Coffee Counter API", function() {
 
   });
 
-  describe("Increase coffee counter", function() {
+  describe("Increase coffee counter", () => {
 
-    let url = "http://localhost:3000/increase";
+    let url = "/increase";
 
     it("returns status 200", (done) => {
       server.post(url)
       .send('{"coffee_name":"Milchkaffee","person_name":"Marco"}')
       .expect("Content-type",/json/)
-      .expect(200)
-      .end(function(err,res){
-        res.status.should.equal(200);
-        res.body.error.should.equal(false);
-        res.body.data.should.equal(30);
-        done();
-      });
+      .expect(200, done);
     });
 
   });
