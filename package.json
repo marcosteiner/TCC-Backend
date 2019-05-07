@@ -1,0 +1,19 @@
+{
+  "name": "tcc-backend",
+  "version": "1.0.0",
+  "description": "Backend of The Coffee Counter",
+  "main": "index.js",
+  "scripts": {
+    "test": "/home/marco/Desktop/tcc/test/integration_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcosteiner/TCC-Backend.git"
+  },
+  "author": "marcosteiner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcosteiner/TCC-Backend/issues"
+  },
+  "homepage": "https://github.com/marcosteiner/TCC-Backend#readme"
+}
