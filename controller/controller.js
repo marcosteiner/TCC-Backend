@@ -10,6 +10,17 @@ function get(req, res){
     dbs.getData(callback);
 };
 
+function increase(req, res){
+  let callback = () => { }
+  dbs.increase(callback);
+};
+
+function decrease(req, res){
+  let callback = () => { }
+  dbs.decrease(callback);
+};
 module.exports = {
-  get: get
+  get: get,
+  increase: increase,
+  decrease: decrease
 }
