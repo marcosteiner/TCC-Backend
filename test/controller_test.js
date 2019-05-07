@@ -8,13 +8,7 @@ describe("The Coffee Counter controller test", () => {
     describe("Get coffee consumption data", () => {
         it("Should return all data about coffee consumption", () => {
 
-            let request  = httpMocks.createRequest({
-                method: 'GET',
-                url: '/user/42',
-                params: {
-                  id: 42
-                }
-            });
+            let request  = httpMocks.createRequest();
         
             let response = httpMocks.createResponse();
 
@@ -25,5 +19,35 @@ describe("The Coffee Counter controller test", () => {
             sinon.assert.calledOnce(dbsStub);
             chai.assert(response._isJSON);
         })
-    })
+    });
+
+    describe("Change coffee consumption data", () => {
+        it("Should increase the counter of one entry", () => {
+
+            let request  = httpMocks.createRequest();
+        
+            let response = httpMocks.createResponse();
+
+            let dbsStub = sinon.spy(dbs, 'increase')
+
+            controller.get(request, response);
+
+            sinon.assert.calledOnce(dbsStub);
+            chai.assert(response._isJSON);
+        });
+
+        it("Should decrease the counter of one entry", () => {
+
+            let request  = httpMocks.createRequest();
+        
+            let response = httpMocks.createResponse();
+
+            let dbsStub = sinon.spy(dbs, 'decrease')
+
+            controller.get(request, response);
+
+            sinon.assert.calledOnce(dbsStub);
+            chai.assert(response._isJSON);
+        });
+    });
 });
