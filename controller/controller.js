@@ -11,13 +11,37 @@ function get(req, res){
 };
 
 function increase(req, res){
-  let callback = () => { }
-  dbs.increase(callback);
+  let onError = (err) => {
+    if (err) {
+      throw err;
+    }
+  }
+
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log(rows);
+    res.json(rows);
+  }
+  dbs.increase(onError, callback);
 };
 
 function decrease(req, res){
-  let callback = () => { }
-  dbs.decrease(callback);
+  let onError = (err) => {
+    if (err) {
+      throw err;
+    }
+  }
+
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log(rows);
+    res.json(rows);
+  }
+  dbs.decrease(onError, callback);
 };
 module.exports = {
   get: get,
