@@ -1,10 +1,16 @@
-const controller = require('./controller/controller');
-var express = require('express');
-var app = express();
+let express = require('express');
+let app = express();
+let dbs = require('./services/db_service');
 
 
 app.get('/', (req, res) => {
-    res.send('[{"coffee_name":"Milchkaffee","person_name":"Marco"},{"coffee_name":"Espresso","person_name":"Marco"},{"coffee_name":"Milchkaffee","person_name":"Pascal"}]')
+    let callback = (err, rows) => {
+        if (err) {
+          throw err;
+        }
+        res.json(rows);
+      }
+    dbs.getData(callback);
 });
   
 app.listen(3000, () => console.log("Listening on port 3000..."));
