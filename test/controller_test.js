@@ -30,7 +30,7 @@ describe("The Coffee Counter controller test", () => {
 
             let dbsStub = sinon.spy(dbs, 'increase')
 
-            controller.get(request, response);
+            controller.increase(request, response);
 
             sinon.assert.calledOnce(dbsStub);
             chai.assert(response._isJSON);
@@ -44,7 +44,7 @@ describe("The Coffee Counter controller test", () => {
 
             let dbsStub = sinon.spy(dbs, 'decrease')
 
-            controller.get(request, response);
+            controller.decrease(request, response);
 
             sinon.assert.calledOnce(dbsStub);
             chai.assert(response._isJSON);

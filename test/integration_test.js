@@ -1,3 +1,4 @@
+
 let expect  = require("chai").expect;
 let request = require("request");
 let supertest = require("supertest");
@@ -26,14 +27,18 @@ describe("The Coffee Counter API", () => {
 
   });
 
-  describe("Increase coffee counter", () => {
+  describe("Increase coffee counter", function(){
+    this.timeout(10000);
 
     let url = "/increase";
 
     it("returns status 200", (done) => {
       server.post(url)
       .send('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27}')
-      .expect(200, done);
+      .expect(200)
+      .end((err, res) => {
+        done();
+      });
     });
 
     it("returns status returns the updated table row", (done) => {
