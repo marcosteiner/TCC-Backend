@@ -41,18 +41,18 @@ describe("The Coffee Counter API", () => {
       });
     });
 
-    it("returns status returns the updated table row", (done) => {
+    it("returns the updated table row", (done) => {
       server.post(url)
       .send('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":28}')
       .expect("Content-type",/json/)
       .end((err, res) => {
-        expect(res.body).to.equal('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}');
+        expect(res.body).to.deep.equal([{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}]);
         done();
       });
     });
 
-    it("returns the coffee updated coffee consumption data", (done) => {
-      request(url, (error, response, body) => {
+    it("returns the updated coffee consumption data", (done) => {
+      request("http://localhost:3000/", (error, response, body) => {
         expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29},{"coffee_name":"Espresso","person_name":"Marco","coffee_count":2},{"coffee_name":"Milchkaffee","person_name":"Pascal","coffee_count":27}]');
         done();
       });
@@ -60,18 +60,24 @@ describe("The Coffee Counter API", () => {
 
     it("decreases the value once for each request", (done) => {
       server.post("/decrease")
-      .send('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}');
+      .send('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}')
+      .end((err, res) => {
+        expect(res.body).to.deep.equal([{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":28}]);
+        done();
+      });
+    });
 
+    it("decreases the value again for next request", (done) => {
       server.post("/decrease")
       .send('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":28}')
       .end((err, res) => {
-        expect(res.body).to.equal('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27}');
+        expect(res.body).to.deep.equal([{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27}]);
         done();
       });
     });
 
     it("The default values for the database are restored", (done) => {
-      request(url, (error, response, body) => {
+      request("http://localhost:3000/", (error, response, body) => {
         expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27},{"coffee_name":"Espresso","person_name":"Marco","coffee_count":2},{"coffee_name":"Milchkaffee","person_name":"Pascal","coffee_count":27}]');
         done();
       });
