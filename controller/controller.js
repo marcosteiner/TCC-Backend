@@ -21,7 +21,6 @@ function increase(req, res){
     if (err) {
       throw err;
     }
-    console.log(rows);
     res.json(rows);
   }
   dbs.increase(onError, callback);
@@ -38,7 +37,6 @@ function decrease(req, res){
     if (err) {
       throw err;
     }
-    console.log(rows);
     res.json(rows);
   }
   dbs.decrease(onError, callback);
