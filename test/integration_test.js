@@ -1,6 +1,5 @@
 var expect  = require("chai").expect;
 var request = require("request");
-const dbs = require("../services/db_service")
 
 describe("The Coffee Counter API", function() {
 
