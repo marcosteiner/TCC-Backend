@@ -2,7 +2,6 @@ const dbs = require('../services/db_service');
 
 function get(req, res){
     let callback = (err, rows) => {
-        let result
         if (err) {
           throw err;
         }
