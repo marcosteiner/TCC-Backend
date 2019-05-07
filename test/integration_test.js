@@ -19,7 +19,7 @@ describe("The Coffee Counter API", () => {
 
     it("returns the coffee consumption data as json", (done) => {
       request(url, (error, response, body) => {
-        expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco"},{"coffee_name":"Espresso","person_name":"Marco"},{"coffee_name":"Milchkaffee","person_name":"Pascal"}]');
+        expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27},{"coffee_name":"Espresso","person_name":"Marco","coffee_count":2},{"coffee_name":"Milchkaffee","person_name":"Pascal","coffee_count":27}]');
         done();
       });
     });

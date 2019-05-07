@@ -5,7 +5,7 @@ function getData(callback){
   // open the database
   let db = new sqlite3.Database('./database/Coffee.db');
   
-  let sql = `SELECT coffee_name, person_name FROM consumption
+  let sql = `SELECT coffee_name, person_name, coffee_count FROM consumption
             ORDER BY person_name`;
   
   db.all(sql, [], callback);
