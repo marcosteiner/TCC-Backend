@@ -33,8 +33,17 @@ describe("The Coffee Counter API", () => {
     it("returns status 200", (done) => {
       server.post(url)
       .send('{"coffee_name":"Milchkaffee","person_name":"Marco"}')
-      .expect("Content-type",/json/)
       .expect(200, done);
+    });
+
+    it("returns status returns the updated table row", (done) => {
+      server.post(url)
+      .send('{"coffee_name":"Milchkaffee","person_name":"Marco"}')
+      .expect("Content-type",/json/)
+      .end((err, res) => {
+        expect(res.body).to.equal('{"coffee_name":"Milchkaffee","person_name":"Marco"}');
+        done();
+      })
     });
 
   });
