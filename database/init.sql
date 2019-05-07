@@ -1,0 +1,15 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE coffees ( name TEXT PRMIARY KEY );
+INSERT INTO coffees VALUES('Espresso');
+INSERT INTO coffees VALUES('Machiato');
+INSERT INTO coffees VALUES('Milchkaffee');
+CREATE TABLE person ( name TEXT PRIMARY KEY );
+INSERT INTO person VALUES('Marco');
+INSERT INTO person VALUES('Pascal');
+INSERT INTO person VALUES('Nicola');
+CREATE TABLE consumption ( id INTEGER PRIMARY KEY, coffee_name TEXT, person_name TEXT, coffee_count INTEGER, FOREIGN KEY (coffee_name) REFERENCES coffee (name) ON DELETE CASCADE, FOREIGN KEY (person_name) REFERENCES person (name) ON DELETE CASCADE );
+INSERT INTO consumption VALUES(1,'Milchkaffee','Marco',27);
+INSERT INTO consumption VALUES(2,'Milchkaffee','Pascal',27);
+INSERT INTO consumption VALUES(3,'Espresso','Marco',2);
+COMMIT;
