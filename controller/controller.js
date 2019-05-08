@@ -10,6 +10,16 @@ function get(req, res){
     dbs.getData(callback);
 };
 
+function getUsers(req, res){
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.json(rows);
+  }
+  dbs.getUsers(callback);
+}
+
 function totalCount(req, res){
   let callback = (err, rows) => {
     if (err) {
@@ -54,6 +64,7 @@ function decrease(req, res){
 
 module.exports = {
   get: get,
+  getUsers: getUsers,
   increase: increase,
   decrease: decrease,
   totalCount : totalCount

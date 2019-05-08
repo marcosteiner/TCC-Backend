@@ -23,7 +23,7 @@ describe("The Coffee Counter controller test", () => {
 
     describe("Operations with the toal coffee count", () => {
 
-        it("Should return the sum of all coffees consumed", () => {
+        it("should return the sum of all coffees consumed", () => {
             let request  = httpMocks.createRequest();
         
             let response = httpMocks.createResponse();
@@ -37,8 +37,23 @@ describe("The Coffee Counter controller test", () => {
         });
     });
 
+    describe("Return all users", () => {
+        it("should return all users", () => {
+
+            let request  = httpMocks.createRequest();
+        
+            let response = httpMocks.createResponse();
+
+            let dbsSpy = sinon.spy(dbs, 'getUsers')
+
+            controller.getUsers(request, response);
+
+            sinon.assert.calledOnce(dbsSpy);
+        });
+    });
+
     describe("Change coffee consumption data", () => {
-        it("Should increase the counter of one entry", () => {
+        it("should increase the counter of one entry", () => {
 
             let request  = httpMocks.createRequest();
         
@@ -52,7 +67,7 @@ describe("The Coffee Counter controller test", () => {
             chai.assert(response._isJSON);
         });
 
-        it("Should decrease the counter of one entry", () => {
+        it("should decrease the counter of one entry", () => {
 
             let request  = httpMocks.createRequest();
         
