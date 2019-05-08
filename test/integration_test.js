@@ -27,7 +27,7 @@ describe("The Coffee Counter API", () => {
 
   });
 
-  describe("Increase coffee counter", function(){
+  describe("Update the coffee counter", function(){
     this.timeout(10000);
 
     let url = "/increase";
@@ -85,4 +85,15 @@ describe("The Coffee Counter API", () => {
 
   });
   
+
+  describe("Get the total amount of coffees consumed", () => {
+
+    it("Should return the correct amount of coffees consumed" ,(done) => {
+      server.get("/total-count")
+      .end((req, res) => {
+        expect(res.body).to.equal("60");
+        done();
+      });
+    })
+  })
 });
