@@ -102,7 +102,7 @@ describe("The Coffee Counter API", () => {
     it("Should return all users" ,(done) => {
       server.get("/users")
       .end((req, res) => {
-        expect(res.body).to.deep.equal([{"person_name": "Marco"},{"person_name": "Nicola"},{"person_name": "Pascal"}]);
+        expect(res.body).to.deep.equal([{"name": "Marco"},{"name": "Nicola"},{"name": "Pascal"}]);
         done();
       });
     })
