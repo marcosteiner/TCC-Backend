@@ -96,4 +96,15 @@ describe("The Coffee Counter API", () => {
       });
     })
   })
+
+  describe("Get all users", () => {
+
+    it("Should return all users" ,(done) => {
+      server.get("/users")
+      .end((req, res) => {
+        expect(res.body).to.deep.equal([{"person_name": "Marco"},{"person_name": "Nicola"},{"person_name": "Pascal"}]);
+        done();
+      });
+    })
+  })
 });

@@ -7,6 +7,8 @@ app.get('/', (req, res) => controller.get(req, res));
 
 app.get('/total-count', (req, res) => { controller.totalCount(req, res)});
 
+app.get('/users', (req, res) => { res.json([{"person_name": "Marco"},{"person_name": "Nicola"},{"person_name": "Pascal"}])});
+
 app.post('/increase', (req, res) => controller.increase(req, res));
 //(req, res) => { res.json('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}');}
 
