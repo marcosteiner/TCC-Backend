@@ -5,7 +5,7 @@ let controller = require('./controller/controller');
 
 app.get('/', (req, res) => controller.get(req, res));
 
-app.get('/total-count', (req, res) => { res.json("60");});
+app.get('/total-count', (req, res) => { controller.totalCount(req, res)});
 
 app.post('/increase', (req, res) => controller.increase(req, res));
 //(req, res) => { res.json('{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29}');}

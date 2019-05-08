@@ -91,7 +91,7 @@ describe("The Coffee Counter API", () => {
     it("Should return the correct amount of coffees consumed" ,(done) => {
       server.get("/total-count")
       .end((req, res) => {
-        expect(res.body).to.equal("60");
+        expect(res.body).to.deep.equal([{"SUM(coffee_count)":56}]);
         done();
       });
     })
