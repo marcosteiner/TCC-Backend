@@ -11,6 +11,16 @@ function getData(callback){
   db.close();
 }
 
+function totalCount(callback){
+  let db = new sqlite3.Database('./database/Coffee.db');
+  db.serialize(() => {
+    db.exec("BEGIN");
+    db.all("SELECT SUM(coffee_count) FROM consumption", [], callback);
+    db.exec("COMMIT");
+  });
+  db.close();
+}
+
 function increase(onError, callback){
   let db = new sqlite3.Database('./database/Coffee.db');
   db.serialize(() => {
@@ -45,5 +55,6 @@ function decrease(onError, callback){
 module.exports = {
   getData: getData,
   increase: increase,
-  decrease: decrease
+  decrease: decrease,
+  totalCount: totalCount
 }

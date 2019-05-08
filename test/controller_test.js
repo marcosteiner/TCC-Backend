@@ -12,13 +12,29 @@ describe("The Coffee Counter controller test", () => {
         
             let response = httpMocks.createResponse();
 
-            let dbsStub = sinon.spy(dbs, 'getData')
+            let dbsSpy = sinon.spy(dbs, 'getData')
 
             controller.get(request, response);
 
-            sinon.assert.calledOnce(dbsStub);
+            sinon.assert.calledOnce(dbsSpy);
             chai.assert(response._isJSON);
         })
+    });
+
+    describe("Operations with the toal coffee count", () => {
+
+        it("Should return the sum of all coffees consumed", () => {
+            let request  = httpMocks.createRequest();
+        
+            let response = httpMocks.createResponse();
+    
+            let dbsSpy = sinon.spy(dbs, 'totalCount')
+    
+            controller.totalCount(request, response);
+    
+            sinon.assert.calledOnce(dbsSpy);
+            chai.assert(response._isJSON);
+        });
     });
 
     describe("Change coffee consumption data", () => {
@@ -28,11 +44,11 @@ describe("The Coffee Counter controller test", () => {
         
             let response = httpMocks.createResponse();
 
-            let dbsStub = sinon.spy(dbs, 'increase')
+            let dbsSpy = sinon.spy(dbs, 'increase')
 
             controller.increase(request, response);
 
-            sinon.assert.calledOnce(dbsStub);
+            sinon.assert.calledOnce(dbsSpy);
             chai.assert(response._isJSON);
         });
 
@@ -42,11 +58,11 @@ describe("The Coffee Counter controller test", () => {
         
             let response = httpMocks.createResponse();
 
-            let dbsStub = sinon.spy(dbs, 'decrease')
+            let dbsSpy = sinon.spy(dbs, 'decrease')
 
             controller.decrease(request, response);
 
-            sinon.assert.calledOnce(dbsStub);
+            sinon.assert.calledOnce(dbsSpy);
             chai.assert(response._isJSON);
         });
     });
