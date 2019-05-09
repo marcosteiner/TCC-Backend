@@ -25,7 +25,6 @@ function getCoffees(req, res){
     if (err) {
       throw err;
     }
-    console.log(rows);
     res.json(rows);
   }
   dbs.getCoffees(callback);
@@ -73,11 +72,33 @@ function decrease(req, res){
   dbs.decrease(onError, callback);
 };
 
+function createUser(req, res){
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.send();
+  }
+  dbs.createUser(callback, "Marco");
+}
+
+function deleteUser(req, res){
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    res.send();
+  }
+  dbs.deleteUser(callback, "Marco");
+}
+
 module.exports = {
   get: get,
   getUsers: getUsers,
   increase: increase,
   decrease: decrease,
   totalCount: totalCount,
-  getCoffees: getCoffees
+  getCoffees: getCoffees,
+  createUser: createUser,
+  deleteUser: deleteUser
 }

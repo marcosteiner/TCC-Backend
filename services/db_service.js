@@ -71,6 +71,30 @@ function decrease(onError, callback){
   db.close();
 }
 
+function createUser(callback, username){
+  let db = new sqlite3.Database('./database/Coffee.db');
+  db.serialize(() => {
+    db.exec("BEGIN");
+    db.run("INSERT INTO person VALUES ($personName)", 
+    {$personName: "Marco"}, 
+    callback);
+    db.exec("COMMIT");  
+  });
+  db.close();
+}
+
+function deleteUser(callback, username){
+  let db = new sqlite3.Database('./database/Coffee.db');
+  db.serialize(() => {
+    db.exec("BEGIN");
+    db.run("DELETE FROM person WHERE name = $personName", 
+    {$personName: "Marco"}, 
+    callback);
+    db.exec("COMMIT");  
+  });
+  db.close();
+}
+
 
 module.exports = {
   getData: getData,
@@ -78,5 +102,7 @@ module.exports = {
   increase: increase,
   decrease: decrease,
   totalCount: totalCount,
-  getCoffees: getCoffees
+  getCoffees: getCoffees,
+  createUser: createUser,
+  deleteUser: deleteUser
 }

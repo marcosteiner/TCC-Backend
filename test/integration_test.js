@@ -118,4 +118,44 @@ describe("The Coffee Counter API", () => {
       });
     })
   })
+
+  describe("Test create user", () => {
+
+    it("creates a new user", (done) => {
+      server.post("/delete/user")
+      .send('{"name": "Marco"}')
+      .expect(200)
+      .end((err, res) => {
+        done();
+      });
+    });
+
+    it("Should return all users without the deleted" ,(done) => {
+      server.get("/users")
+      .end((req, res) => {
+        expect(res.body).to.deep.equal([{"name": "Nicola"},{"name": "Pascal"}]);
+        done();
+      });
+    })
+  })
+
+  describe("Test create user", () => {
+
+    it("creates a new user", (done) => {
+      server.post("/create/user")
+      .send('{"name": "Marco"}')
+      .expect(200)
+      .end((err, res) => {
+        done();
+      });
+    });
+
+    it("Should return all users with the new one" ,(done) => {
+      server.get("/users")
+      .end((req, res) => {
+        expect(res.body).to.deep.equal([{"name": "Marco"},{"name": "Nicola"},{"name": "Pascal"}]);
+        done();
+      });
+    })
+  })
 });
