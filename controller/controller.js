@@ -20,6 +20,17 @@ function getUsers(req, res){
   dbs.getUsers(callback);
 }
 
+function getCoffees(req, res){
+  let callback = (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    console.log(rows);
+    res.json(rows);
+  }
+  dbs.getCoffees(callback);
+}
+
 function totalCount(req, res){
   let callback = (err, rows) => {
     if (err) {
@@ -67,5 +78,6 @@ module.exports = {
   getUsers: getUsers,
   increase: increase,
   decrease: decrease,
-  totalCount : totalCount
+  totalCount: totalCount,
+  getCoffees: getCoffees
 }

@@ -3,13 +3,13 @@ let expect  = require("chai").expect;
 let request = require("request");
 let supertest = require("supertest");
 
-let server = supertest.agent("http://localhost:3000");
+let server = supertest.agent("http://localhost:3001");
 
 describe("The Coffee Counter API", () => {
 
   describe("Get coffee consumption data", () => {
 
-    let url = "http://localhost:3000/";
+    let url = "http://localhost:3001/";
 
     it("returns status 200", (done) => {
       request(url, (error, response, body) => {
@@ -52,7 +52,7 @@ describe("The Coffee Counter API", () => {
     });
 
     it("returns the updated coffee consumption data", (done) => {
-      request("http://localhost:3000/", (error, response, body) => {
+      request("http://localhost:3001/", (error, response, body) => {
         expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":29},{"coffee_name":"Espresso","person_name":"Marco","coffee_count":2},{"coffee_name":"Milchkaffee","person_name":"Pascal","coffee_count":27}]');
         done();
       });
@@ -77,7 +77,7 @@ describe("The Coffee Counter API", () => {
     });
 
     it("The default values for the database are restored", (done) => {
-      request("http://localhost:3000/", (error, response, body) => {
+      request("http://localhost:3001/", (error, response, body) => {
         expect(body).to.equal('[{"coffee_name":"Milchkaffee","person_name":"Marco","coffee_count":27},{"coffee_name":"Espresso","person_name":"Marco","coffee_count":2},{"coffee_name":"Milchkaffee","person_name":"Pascal","coffee_count":27}]');
         done();
       });
@@ -103,6 +103,17 @@ describe("The Coffee Counter API", () => {
       server.get("/users")
       .end((req, res) => {
         expect(res.body).to.deep.equal([{"name": "Marco"},{"name": "Nicola"},{"name": "Pascal"}]);
+        done();
+      });
+    })
+  })
+
+  describe("Get all coffees", () => {
+
+    it("Should return all coffees" ,(done) => {
+      server.get("/coffees")
+      .end((req, res) => {
+        expect(res.body).to.deep.equal([{"name": "Espresso"},{"name": "Machiato"},{"name": "Milchkaffee"}]);
         done();
       });
     })
