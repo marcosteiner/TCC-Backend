@@ -1,84 +1,84 @@
-const sinon = require('sinon');
-const chai = require('chai');
-const dbs = require('../services/db_service');
-const controller = require('../controller/controller');
-const httpMocks = require('node-mocks-http');
+// const sinon = require('sinon');
+// const chai = require('chai');
+// const dbs = require('../services/db_service');
+// const controller = require('../controller/controller');
+// const httpMocks = require('node-mocks-http');
 
-describe("The Coffee Counter controller test", () => {
-    describe("Get coffee consumption data", () => {
-        it("Should return all data about coffee consumption", () => {
+// describe("The Coffee Counter controller test", () => {
+//     describe("Get coffee consumption data", () => {
+//         it("Should return all data about coffee consumption", () => {
 
-            let request  = httpMocks.createRequest();
+//             let request  = httpMocks.createRequest();
         
-            let response = httpMocks.createResponse();
+//             let response = httpMocks.createResponse();
 
-            let dbsSpy = sinon.spy(dbs, 'getData')
+//             let dbsSpy = sinon.spy(dbs, 'getData')
 
-            controller.get(request, response);
+//             controller.get(request, response);
 
-            sinon.assert.calledOnce(dbsSpy);
-            chai.assert(response._isJSON);
-        })
-    });
+//             sinon.assert.calledOnce(dbsSpy);
+//             chai.assert(response._isJSON);
+//         })
+//     });
 
-    describe("Operations with the toal coffee count", () => {
+//     describe("Operations with the toal coffee count", () => {
 
-        it("should return the sum of all coffees consumed", () => {
-            let request  = httpMocks.createRequest();
+//         it("should return the sum of all coffees consumed", () => {
+//             let request  = httpMocks.createRequest();
         
-            let response = httpMocks.createResponse();
+//             let response = httpMocks.createResponse();
     
-            let dbsSpy = sinon.spy(dbs, 'totalCount')
+//             let dbsSpy = sinon.spy(dbs, 'totalCount')
     
-            controller.totalCount(request, response);
+//             controller.totalCount(request, response);
     
-            sinon.assert.calledOnce(dbsSpy);
-            chai.assert(response._isJSON);
-        });
-    });
+//             sinon.assert.calledOnce(dbsSpy);
+//             chai.assert(response._isJSON);
+//         });
+//     });
 
-    describe("Return all users", () => {
-        it("should return all users", () => {
+//     describe("Return all users", () => {
+//         it("should return all users", () => {
 
-            let request  = httpMocks.createRequest();
+//             let request  = httpMocks.createRequest();
         
-            let response = httpMocks.createResponse();
+//             let response = httpMocks.createResponse();
 
-            let dbsSpy = sinon.spy(dbs, 'getUsers')
+//             let dbsSpy = sinon.spy(dbs, 'getUsers')
 
-            controller.getUsers(request, response);
+//             controller.getUsers(request, response);
 
-            sinon.assert.calledOnce(dbsSpy);
-        });
-    });
+//             sinon.assert.calledOnce(dbsSpy);
+//         });
+//     });
 
-    describe("Change coffee consumption data", () => {
-        it("should increase the counter of one entry", () => {
+//     describe("Change coffee consumption data", () => {
+//         it("should increase the counter of one entry", () => {
 
-            let request  = httpMocks.createRequest();
+//             let request  = httpMocks.createRequest();
         
-            let response = httpMocks.createResponse();
+//             let response = httpMocks.createResponse();
 
-            let dbsSpy = sinon.spy(dbs, 'increase')
+//             let dbsSpy = sinon.spy(dbs, 'increase')
 
-            controller.increase(request, response);
+//             controller.increase(request, response);
 
-            sinon.assert.calledOnce(dbsSpy);
-            chai.assert(response._isJSON);
-        });
+//             sinon.assert.calledOnce(dbsSpy);
+//             chai.assert(response._isJSON);
+//         });
 
-        it("should decrease the counter of one entry", () => {
+//         it("should decrease the counter of one entry", () => {
 
-            let request  = httpMocks.createRequest();
+//             let request  = httpMocks.createRequest();
         
-            let response = httpMocks.createResponse();
+//             let response = httpMocks.createResponse();
 
-            let dbsSpy = sinon.spy(dbs, 'decrease')
+//             let dbsSpy = sinon.spy(dbs, 'decrease')
 
-            controller.decrease(request, response);
+//             controller.decrease(request, response);
 
-            sinon.assert.calledOnce(dbsSpy);
-            chai.assert(response._isJSON);
-        });
-    });
-});
+//             sinon.assert.calledOnce(dbsSpy);
+//             chai.assert(response._isJSON);
+//         });
+//     });
+// });

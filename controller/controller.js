@@ -53,7 +53,7 @@ function increase(req, res){
     }
     res.json(rows);
   }
-  dbs.increase(onError, callback);
+  dbs.increase(onError, callback, req.params.username, req.params.coffeename);
 };
 
 function decrease(req, res){
@@ -69,7 +69,7 @@ function decrease(req, res){
     }
     res.json(rows);
   }
-  dbs.decrease(onError, callback);
+  dbs.decrease(onError, callback, req.params.username, req.params.coffeename);
 };
 
 function createUser(req, res){
@@ -79,7 +79,7 @@ function createUser(req, res){
     }
     res.send();
   }
-  dbs.createUser(callback, "Marco");
+  dbs.createUser(callback, req.params.name);
 }
 
 function deleteUser(req, res){
@@ -89,7 +89,7 @@ function deleteUser(req, res){
     }
     res.send();
   }
-  dbs.deleteUser(callback, "Marco");
+  dbs.deleteUser(callback, req.params.name);
 }
 
 module.exports = {

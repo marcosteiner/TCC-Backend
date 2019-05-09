@@ -41,30 +41,30 @@ function totalCount(callback){
   db.close();
 }
 
-function increase(onError, callback){
+function increase(onError, callback, username, coffeename){
   let db = new sqlite3.Database('./database/Coffee.db');
   db.serialize(() => {
     db.exec("BEGIN");
     db.run("UPDATE consumption SET coffee_count = coffee_count + 1 WHERE coffee_name = $coffeeName AND person_name = $personName", 
-    {$coffeeName: "Milchkaffee", $personName: "Marco"}, 
+    {$coffeeName: coffeename, $personName: username}, 
     onError);
     db.all("SELECT coffee_name, person_name, coffee_count FROM consumption WHERE coffee_name = $coffeeName AND person_name = $personName",
-    {$coffeeName: "Milchkaffee", $personName: "Marco"}, 
+    {$coffeeName: coffeename, $personName: username}, 
     callback);
     db.exec("COMMIT");
   });
   db.close();
 }
 
-function decrease(onError, callback){
+function decrease(onError, callback, username, coffeename){
   let db = new sqlite3.Database('./database/Coffee.db');
   db.serialize(() => {
     db.exec("BEGIN");
     db.run("UPDATE consumption SET coffee_count = coffee_count - 1 WHERE coffee_name = $coffeeName AND person_name = $personName", 
-    {$coffeeName: "Milchkaffee", $personName: "Marco"}, 
+    {$coffeeName: coffeename, $personName: username}, 
     onError);
     db.all("SELECT coffee_name, person_name, coffee_count FROM consumption WHERE coffee_name = $coffeeName AND person_name = $personName",
-    {$coffeeName: "Milchkaffee", $personName: "Marco"}, 
+    {$coffeeName: coffeename, $personName: username}, 
     callback);
     db.exec("COMMIT");  
   });
@@ -76,7 +76,7 @@ function createUser(callback, username){
   db.serialize(() => {
     db.exec("BEGIN");
     db.run("INSERT INTO person VALUES ($personName)", 
-    {$personName: "Marco"}, 
+    {$personName: username}, 
     callback);
     db.exec("COMMIT");  
   });
@@ -88,7 +88,7 @@ function deleteUser(callback, username){
   db.serialize(() => {
     db.exec("BEGIN");
     db.run("DELETE FROM person WHERE name = $personName", 
-    {$personName: "Marco"}, 
+    {$personName: username}, 
     callback);
     db.exec("COMMIT");  
   });
